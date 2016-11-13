@@ -34,6 +34,7 @@
 				opacity: 0.1;
     			filter: alpha(opacity=10); /* For IE8 and earlier */
 			}
+			.reveal section img { background:none; border:none; box-shadow:none; }
 		</style>
 
 		<!--[if lt IE 9]>
@@ -73,8 +74,74 @@
 				</section>
 
 				<section>
-					<h2>On a Very High level</h2>
-					<img src=kafka2vertika.png></img>
+					<h2>On a Very High Level</h2>
+					<img src="kafka2vertika.png"></img>
+				</section>
+
+				<section>
+					<h2>After Data Is in Vertica</h2>
+					<img src="elt.png"></img>
+				</section>
+
+				<section>
+					<h2>"Transform" Order of Magnitude</h2>
+					<p>Supply-side platforms generates bid requests</p>
+					<p class="fragment">Our demand-side platform (bidder) generates ~ x * 100 000 bid responses per second</p>
+					<p class="fragment">Some of those responses (~ y * 10 000 per second) initiate impressions &mdash; we show banners</p>
+					<p class="fragment">Messages are ~ 1kb in size</p>
+					<small>where x, y &isin; <i>R</i>, x &ge; 1, y &ge; 1</small>
+				</section>
+
+				<section>
+					<h2>Problem</h2>
+					<p>All we need is left join of impressions and bids, right?</p>
+					<div class="fragment">
+						<p>Right, that is what we do, but:</p>
+						<ul>
+							<li>Vertica is too expensive for further scale</li>
+							<li class="fragment">It is an abuse to run ELT, Vertica is tailored for analytics</li>
+						</ul>
+					</div>
+				</section>
+
+				<section>
+					<h2>Real Face of ELT</h2>
+					<img src="infrastructure-vertica-cluster-summary.png"></img>
+				</section>
+
+				<section>
+					<h2>Solution</h2>
+					<p>Let's join kafka streams (impressions, bids) before putting it to Vertica</p>
+					<p class="fragment">PROFIT!!!</p>
+				</section>
+
+				<section>
+					<h2>Off-the-shelf Kafka Streams</h2>
+					<pre><code class="hljs" data-trim contenteditable>
+KStreamBuilder builder = new KStreamBuilder();
+KStream&le;String, String&gt; textLines =
+    builder.stream(stringSerde, stringSerde, "TextLinesTopic");
+KStream&le;String, Long&gt; wordCounts = textLines
+    .flatMapValues(value -> Arrays.asList(value.toLowerCase().split("\\W+")))
+    .map((key, word) -> new KeyValue&le;&gt;(word, word))
+    .countByKey("Counts")
+    .toStream();
+wordCounts.to(stringSerde, longSerde, "WordsWithCountsTopic");
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Off-the-shelf Flink Streaming</h2>
+					<pre><code class="hljs" data-trim contenteditable>
+val mentionedSymbols = tweetStream.flatMap(tweet => tweet.split(" "))
+    .map(_.toUpperCase())
+    .filter(symbols.contains(_))
+
+val tweetsPerStock = mentionedSymbols.map(Count(_, 1))
+    .groupBy("symbol")
+    .window(Time.of(30, SECONDS))
+    .sum("count")
+					</code></pre>
 				</section>
 
 				<section>
