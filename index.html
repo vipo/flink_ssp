@@ -93,41 +93,24 @@
 				</section>
 
 				<section>
-					<h2>Problem</h2>
-					<p>All we need is left join of impressions and bids, right?</p>
-					<div class="fragment">
-						<p>Right, that is what we do, but:</p>
-						<ul>
-							<li>Vertica is too expensive for further scale</li>
-							<li class="fragment">It is an abuse to run ELT, Vertica is tailored for analytics</li>
-						</ul>
-					</div>
-				</section>
-
-				<section>
 					<h2>Real Face of ELT</h2>
 					<img src="infrastructure-vertica-cluster-summary.png"></img>
 				</section>
 
 				<section>
-					<h2>Solution</h2>
-					<p>Let's join kafka streams (impressions, bids) before putting it to Vertica</p>
-					<p class="fragment">PROFIT!!!</p>
+					<h2>Does It Scale?</h2>
+					<p class="fragment">Yes, it does...</p>
+					<p class="fragment">... but Internet scales much <em>faster</em></p>
 				</section>
 
 				<section>
-					<h2>Off-the-shelf Kafka Streams</h2>
-					<pre><code class="hljs" data-trim contenteditable>
-KStreamBuilder builder = new KStreamBuilder();
-KStream&le;String, String&gt; textLines =
-    builder.stream(stringSerde, stringSerde, "TextLinesTopic");
-KStream&le;String, Long&gt; wordCounts = textLines
-    .flatMapValues(value -> Arrays.asList(value.toLowerCase().split("\\W+")))
-    .map((key, word) -> new KeyValue&le;&gt;(word, word))
-    .countByKey("Counts")
-    .toStream();
-wordCounts.to(stringSerde, longSerde, "WordsWithCountsTopic");
-					</code></pre>
+					<h2>Streaming</h2>
+					<p>Join kafka streams (impressions, bids) before putting it to Vertica. We tried:</p>
+					<ul>
+						<li class="fragment">Storm, but we want types</li>
+						<li class="fragment">Kafka Streams, but we use Kafka 0.8</li>
+						<li class="fragment">Flink and it seamed to be OK.</li>
+					</ul>
 				</section>
 
 				<section>
