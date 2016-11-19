@@ -93,6 +93,32 @@
 				</section>
 
 				<section>
+					<h2>Left Outer Join</h2>
+					<table>
+						<thead>
+							<tr>
+								<th>Impression</th>
+								<th>Initiated by bid</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Impression 13213</td>
+								<td>Bid 234343243</td>
+							</tr>
+							<tr>
+								<td>Impression 13233</td>
+								<td><i>NULL</i></td>
+							</tr>
+							<tr>
+								<td>Impression 132</td>
+								<td>Bid 54325435</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+
+				<section>
 					<h2>Real Face of ELT</h2>
 					<img src="infrastructure-vertica-cluster-summary.png"></img>
 				</section>
@@ -116,15 +142,46 @@
 				<section>
 					<h2>Off-the-shelf Flink Streaming</h2>
 					<pre><code class="hljs" data-trim contenteditable>
-val mentionedSymbols = tweetStream.flatMap(tweet => tweet.split(" "))
-    .map(_.toUpperCase())
-    .filter(symbols.contains(_))
-
-val tweetsPerStock = mentionedSymbols.map(Count(_, 1))
-    .groupBy("symbol")
-    .window(Time.of(30, SECONDS))
-    .sum("count")
+dataStream.join(otherStream)
+  .where(0).equalTo(1)
+  .window(TumblingEventTimeWindows.of(Time.seconds(3)))
+  .apply (new JoinFunction () {...});
 					</code></pre>
+				</section>
+
+				<section>
+					<h2>Perfect World</h2>
+					<img src="all_good.svg"></img>
+				</section>
+
+				<section>
+					<h2>Real World</h2>
+					<img src="all_bad.svg"></img>
+					<aside class="notes">
+						<ol>
+							<li>Kafka under repartitioning</li>
+							<li>Chasing, small topics are always faster</li>
+						</ol>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Perfect World's Math</h2>
+					<ul>
+						<li>30 000 impressions per second</li>
+						<li>300 000 bids per second</li>
+						<li>300 seconds window</li>
+						<li>1k message size</li>
+					</ul>
+					<p class="fragment">300 * (300 000 + 30 000) * 1 = 99 Gb</p>
+				</section>
+
+				<section>
+					<h2>Our SSP Principles</h2>
+					<ul>
+						<li>No wall clock</li>
+						<li>No events from the future</li>
+					</ul>
 				</section>
 
 				<section>
@@ -453,7 +510,7 @@ Reveal.addEventListener( 'customevent', function() {
 				history: true,
 				center: true,
 
-				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				transition: 'none', // none/fade/slide/convex/concave/zoom
 
 				// More info https://github.com/hakimel/reveal.js#dependencies
 				dependencies: [
