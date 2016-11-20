@@ -161,6 +161,7 @@ dataStream.join(otherStream)
 						<ol>
 							<li>Kafka under repartitioning</li>
 							<li>Chasing, small topics are always faster</li>
+							<li>Remote locations</li>
 						</ol>
 					</aside>
 				</section>
@@ -171,17 +172,28 @@ dataStream.join(otherStream)
 						<li>30 000 impressions per second</li>
 						<li>300 000 bids per second</li>
 						<li>300 seconds window</li>
-						<li>1k message size</li>
+						<li>1KB single message size</li>
 					</ul>
-					<p class="fragment">300 * (300 000 + 30 000) * 1 = 99 Gb</p>
+					<p class="fragment">300 * (300 000 + 30 000) * 1KB = 99 GB</p>
 				</section>
 
 				<section>
-					<h2>Our SSP Principles</h2>
+					<h2>Principles</h2>
 					<ul>
-						<li>No wall clock</li>
-						<li>No events from the future</li>
+						<li>Do not use wall clock</li>
+						<li>Do not consume events from the future</li>
+						<li>Keep state as small as possible</li>
 					</ul>
+				</section>
+
+				<section>
+					<h2>Practice</h2>
+					<img src="as_is.svg"></img>
+				</section>
+
+				<section data-background="Balance-Scale.jpg">
+					<h2>Checks and Balances</h2>
+
 				</section>
 
 				<section>
