@@ -124,7 +124,7 @@
 				</section>
 
 				<section>
-					<h2>But Maybe It Scale?</h2>
+					<h2>But Maybe It Scales?</h2>
 					<p class="fragment">Yes, it does...</p>
 					<p class="fragment">... but Internet scales much <em>faster</em></p>
 				</section>
@@ -141,7 +141,7 @@
 
 				<section>
 					<h2>Off-the-shelf Flink Streaming</h2>
-					<pre><code class="hljs" data-trim contenteditable>
+					<pre><code class="hljs" data-trim style="font-size: 26px;">
 dataStream.join(otherStream)
   .where(0).equalTo(1)
   .window(TumblingEventTimeWindows.of(Time.seconds(3)))
@@ -202,6 +202,11 @@ dataStream.join(otherStream)
 				</section>
 
 				<section>
+					<h2>Topology</h2>
+					<img src="topology.png"></img>
+				</section>
+
+				<section>
 					<h2>What's Left of Flink</h2>
 					<ul>
 						<li>Wateramarks, as periodic events</li>
@@ -228,7 +233,7 @@ dataStream.join(otherStream)
 					<p>Started with Guava. Then switched to Caffeine.</p>
 					<p>Keep caching code as functional as possible: time is a parameter</p>
 					<pre>
-						<code class="hljs">
+						<code class="hljs" data-trim style="font-size: 26px;">
 trait PassivelyExpiringCache[K &lt;: AnyRef, V &lt;: AnyRef] {
   def put(key: K, value: V, time: Long): Iterator[V]
   def get(key: K): (Option[V], Iterator[V])
