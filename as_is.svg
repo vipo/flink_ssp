@@ -273,17 +273,6 @@
        height="22.727272"
        x="382.95456"
        y="609.7713" />
-    <text
-       xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="463.55112"
-       y="668.66956"
-       id="text4482-3"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         x="463.55112"
-         y="668.66956"
-         id="tspan4507">w</tspan></text>
     <g
        id="g4614"
        transform="matrix(0.3698206,0,0,0.32084385,867.82573,751.49906)">
@@ -647,5 +636,26 @@
        id="path5477-5"
        d="m 692.42202,416.54232 c -0.10157,3.17992 -0.0623,6.36249 -0.0448,9.54345 -0.0161,2.85931 0.0206,5.71855 0.006,8.57783 0.008,2.80605 -0.006,5.61204 -4.2e-4,8.41808 0.004,1.30873 0.008,2.61746 0.0124,3.92619 0,0 -14.97222,7.62872 -14.97222,7.62872 l 0,0 c 0.004,-1.31294 0.009,-2.62588 0.0124,-3.93882 0.005,-2.8059 -0.008,-5.61175 -4.1e-4,-8.41766 -0.0145,-2.8614 0.0224,-5.72277 0.006,-8.5842 0.0173,-3.16573 0.0576,-6.33315 -0.0448,-9.49779 0,0 15.02536,-7.6558 15.02536,-7.6558 z"
        inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="396.59091"
+       y="367.95813"
+       id="text5515"
+       sodipodi:linespacing="125%"
+       transform="translate(0,308.2677)"><tspan
+         sodipodi:role="line"
+         id="tspan5517"></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="463.63635"
+       y="669.40765"
+       id="text5519"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan5521"
+         x="463.63635"
+         y="669.40765">Δ</tspan></text>
   </g>
 </svg>
