@@ -185,9 +185,8 @@ dataStream.join(otherStream)
 				<section>
 					<h2>Principles</h2>
 					<ul>
-						<li>Do not use wall clock</li>
-						<li>Do not consume events from the future</li>
 						<li>Keep state as small as possible</li>
+						<li class="fragment">Do not consume events from the future</li>
 					</ul>
 				</section>
 
@@ -214,10 +213,10 @@ dataStream.join(otherStream)
 				<section>
 					<h2>What's Left of Flink</h2>
 					<ul>
+						<li>Metrics</li>
 						<li>Wateramarks, as periodic events</li>
 						<li>Filter, map, flatMap, split, ...</li>
 						<li>Two input operators</li>
-						<li>Metrics</li>
 						<li>Kafka sinks</li>
 						<li class="fragment">Modified Kafka consumer (stoppable, custom offsets)</li>
 					</ul>
@@ -257,6 +256,7 @@ dataStream.join(otherStream)
 						<li class="fragment">Checkpointing is slow (in our case)</li>
 						<li class="fragment">Has terrible type signatures
 							(i.e. <em>partition</em>, checkpointing)</li>
+						<li class="fragment">No testing infrastructure for Stream API</li>
 					</ul>
 				</section>
 
