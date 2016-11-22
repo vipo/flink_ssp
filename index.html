@@ -48,7 +48,7 @@
 
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
-				<section>
+				<section data-background="sw.png">
 					<h1>Dealing with Flink's Imperfections</h1>
 					<p>
 						Viaceslav Pozdniakov (Adform, Vilnius)
@@ -64,13 +64,6 @@
 							<li>Program (mainly) in Scala
 						</ul>
 					</div>
-					<div class="fragment">
-						<p>Other activities:</p>
-						<ul>
-							<li>Teach Functional Programming at Vilnius University</li>
-							<li>Coorganizer of Functional Vilnius</li>
-						</ul>
-					</div>
 				</section>
 
 				<section>
@@ -84,12 +77,11 @@
 				</section>
 
 				<section>
-					<h2>"Transform" Order of Magnitude</h2>
-					<p>Supply-side platforms generates bid requests</p>
-					<p class="fragment">Our demand-side platform (bidder) generates ~ x * 100 000 bid responses per second (not all requests are replied)</p>
-					<p class="fragment">Some of those responses (~ y * 10 000 per second) initiate impressions &mdash; we show banners</p>
-					<p class="fragment">Messages are ~ 1kb in size</p>
-					<small>where x, y &isin; <i>R</i>, x &ge; 1, y &ge; 1</small>
+					<h2>Modern online advertising</h2>
+					<p>A publisher has a place on a web page where an ad can be shown.</p>
+					<p>Supply-side platforms organize an auction - they send bid requests.</p>
+					<p class="fragment">Demand-side platforms ("bidders") reply to these bids requests with prices (not all requests are replied).</p>
+					<p class="fragment">Some of those responses win - banners are shown (impressions).</p>
 				</section>
 
 				<section>
@@ -119,6 +111,14 @@
 				</section>
 
 				<section>
+					<h2>"Transform" Order of Magnitude</h2>
+					<p>Our demand-side platform (bidder) generates ~ x * 100 000 bid responses per second.</p>
+					<p class="fragment">Some of them (~ y * 10 000 per second) initiate impressions.
+					<p class="fragment">Messages are ~ 1kB in size.</p>
+					<small>where x, y &isin; <i>R</i>, x &ge; 1, y &ge; 1</small>
+				</section>
+
+				<section>
 					<h2>Real Face of ELT</h2>
 					<img src="infrastructure-vertica-cluster-summary.png"></img>
 				</section>
@@ -137,6 +137,11 @@
 						<li class="fragment">Kafka Streams, but we use Kafka 0.8</li>
 						<li class="fragment">Flink and it seamed to be OK.</li>
 					</ul>
+				</section>
+
+				<section>
+					<h2>What We Want to Get</h2>
+					<img src="want.svg"></img>
 				</section>
 
 				<section>
@@ -172,9 +177,9 @@ dataStream.join(otherStream)
 						<li>30 000 impressions per second</li>
 						<li>300 000 bids per second</li>
 						<li>300 seconds window</li>
-						<li>1KB single message size</li>
+						<li>1kB single message size</li>
 					</ul>
-					<p class="fragment">300 * (300 000 + 30 000) * 1KB = 99 GB</p>
+					<p class="fragment">300 * (300 000 + 30 000) * 1kB = 99 GB</p>
 				</section>
 
 				<section>
@@ -219,27 +224,25 @@ dataStream.join(otherStream)
 				</section>
 
 				<section>
-					<h2>Custom components</h2>
+					<h2>Custom topology operators</h2>
 					<ul>
-						<li>Event time saving operator</li>
-						<li>Offset saving operator</li>
-						<li>Throttling operator</li>
+						<li>Event time saving</li>
+						<li>Offset saving</li>
+						<li>Throttling</li>
 						<li>Cache</li>
 					</ul>
 				</section>
 
 				<section>
-					<h2>Do Not Mess With Caches</h2>
-					<p>Started with Guava. Then switched to Caffeine.</p>
-					<p>Keep caching code as functional as possible: time is a parameter</p>
-					<pre>
-						<code class="hljs" data-trim style="font-size: 26px;">
-trait PassivelyExpiringCache[K &lt;: AnyRef, V &lt;: AnyRef] {
-  def put(key: K, value: V, time: Long): Iterator[V]
-  def get(key: K): (Option[V], Iterator[V])
-}
-						</code>
-					</pre>
+					<h2>Things we learned</h2>
+					<ul>
+						<li>Keep cache invalidation synchronous</li>
+						<li class="fragment">Caffeine Cache is faster then Guava Cache</li>
+						<li class="fragment">SandroGrzicic/ScalaBuff generated classes are bad to serialize,
+						scalapb/ScalaPB are good</li>
+						<li class="fragment">Partial proto contracts (+ byte array) give paramount performace gain</li>
+						<li class="fragment">Protobufs are designed for "manual" assembly</li>
+					</ul>
 				</section>
 
 				<section>
@@ -275,8 +278,10 @@ trait PassivelyExpiringCache[K &lt;: AnyRef, V &lt;: AnyRef] {
 				</section>
 
 				<section>
-					<h2>Pretty Much It</h2>
+					<h2>Pretty Much It.</h2>
+					<h3>Thank you!</h3>
 					<p><a href="https://twitter.com/poznia">@poznia</a></p>
+					<p><a href="https://github.com/vipo/flink_ssp">https://github.com/vipo/flink_ssp</a></p>
 				</section>
 
 			</div>
