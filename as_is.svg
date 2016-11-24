@@ -41,8 +41,8 @@
      showgrid="false"
      inkscape:window-width="1385"
      inkscape:window-height="826"
-     inkscape:window-x="65"
-     inkscape:window-y="24"
+     inkscape:window-x="75"
+     inkscape:window-y="34"
      inkscape:window-maximized="0"
      inkscape:object-nodes="false" />
   <metadata
@@ -53,7 +53,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -645,17 +645,17 @@
        sodipodi:linespacing="125%"
        transform="translate(0,308.2677)"><tspan
          sodipodi:role="line"
-         id="tspan5517"></tspan></text>
+         id="tspan5517" /></text>
     <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="463.63635"
-       y="669.40765"
-       id="text5519"
+       x="468.68182"
+       y="667.77124"
+       id="text3151"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         id="tspan5521"
-         x="463.63635"
-         y="669.40765">Δ</tspan></text>
+         id="tspan3153"
+         x="468.68182"
+         y="667.77124">δ</tspan></text>
   </g>
 </svg>

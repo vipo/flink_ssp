@@ -131,7 +131,7 @@
 
 				<section>
 					<h2>Stateful Stream Processing</h2>
-					<p>Join kafka streams (impressions, bids) before putting it to Vertica. We tried:</p>
+					<p>Join kafka streams (impressions, bids) before putting them into Vertica. We tried:</p>
 					<ul>
 						<li class="fragment">Storm, but we want types</li>
 						<li class="fragment">Kafka Streams, but we use Kafka 0.8</li>
@@ -214,9 +214,8 @@ dataStream.join(otherStream)
 					<h2>What's Left of Flink</h2>
 					<ul>
 						<li>Metrics</li>
-						<li>Wateramarks, as periodic events</li>
+						<li>Watermarks</li>
 						<li>Filter, map, flatMap, split, ...</li>
-						<li>Two input operators</li>
 						<li>Partitions</li>
 						<li>Kafka sinks</li>
 						<li class="fragment">Modified Kafka consumer (stoppable, custom offsets)</li>
@@ -224,7 +223,7 @@ dataStream.join(otherStream)
 				</section>
 
 				<section>
-					<h2>Things we learned</h2>
+					<h2>Things We Learned</h2>
 					<ul>
 						<li>Keep cache invalidation synchronous</li>
 						<li class="fragment">Caffeine Cache is faster than Guava Cache</li>
@@ -257,7 +256,7 @@ dataStream.join(otherStream)
 						<li>Partitioning (horisontal scale)</li>
 						<li>Topology UI (for debugging)</li>
 					</ul>
-					<p class="fragment">Everything else available in <em>libraries</em> Monix, Akka Streams, FS2, ...</p>
+					<p class="fragment">Everything else available in <em>libraries</em> like Monix, Akka Streams, FS2, ...</p>
 				</section>
 
 				<section data-background="slavoj_zizek.jpg">
