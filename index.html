@@ -224,16 +224,6 @@ dataStream.join(otherStream)
 				</section>
 
 				<section>
-					<h2>Custom topology operators</h2>
-					<ul>
-						<li>Event time saving</li>
-						<li>Offset saving</li>
-						<li>Throttling</li>
-						<li>Cache</li>
-					</ul>
-				</section>
-
-				<section>
 					<h2>Things we learned</h2>
 					<ul>
 						<li>Keep cache invalidation synchronous</li>
@@ -251,12 +241,10 @@ dataStream.join(otherStream)
 						<li>Framework, not a library</li>
 						<li class="fragment">Topology deployment reminds J2EE times</li>
 						<li class="fragment">Docker unfriendly (we run Mesos Marathon)</li>
-						<li class="fragment">Wants to be persistent (checkpoints)</li>
 						<li class="fragment">Wants two-way network communication (Akka cluster)</li>
+						<li class="fragment">Checkpointing is slow (in our case), bad interface</li>
 						<li class="fragment">Almost doesn't lie about "exactly once" processing</li>
-						<li class="fragment">Checkpointing is slow (in our case)</li>
-						<li class="fragment">Has terrible type signatures
-							(i.e. <em>partition</em>, checkpointing)</li>
+						<li class="fragment">Has terrible type signatures (i.e. <em>partition</em>)</li>
 						<li class="fragment">No testing infrastructure for Stream API</li>
 					</ul>
 				</section>
