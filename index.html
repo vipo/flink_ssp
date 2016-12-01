@@ -59,7 +59,6 @@
 					<div>
 						<p>As Research Infrastructure Pod member:</p>
 						<ul>
-							<li>Run/support algorithms created by researchers</li>
 							<li>Do data engineering</li>
 							<li>Program (mainly) in Scala
 						</ul>
@@ -201,7 +200,6 @@ dataStream.join(otherStream)
 						<li>Slow partition can slow down a whole system</li>
 						<li class="fragment">System can give up waiting for the slowest partition</li>
 						<li class="fragment">System's <em>currentTime</em> depends on data</li>
-						<li class="fragment">Distance between topics is fluctuating</li>
 					</ul>
 				</section>
 
@@ -223,27 +221,11 @@ dataStream.join(otherStream)
 				</section>
 
 				<section>
-					<h2>Things We Learned</h2>
-					<ul>
-						<li>Keep cache invalidation synchronous</li>
-						<li class="fragment">Caffeine Cache is faster than Guava Cache</li>
-						<li class="fragment">SandroGrzicic/ScalaBuff generated classes are bad for serialization,
-						scalapb/ScalaPB are good</li>
-						<li class="fragment">Partial proto contracts (+ byte array) give paramount performance gain</li>
-						<li class="fragment">Protobufs are just designed for "manual" assembly</li>
-					</ul>
-				</section>
-
-				<section>
 					<h2>Bad Flink</h2>
 					<ul>
-						<li>Framework, not a library</li>
-						<li class="fragment">Topology deployment reminds J2EE times</li>
+						<li>Topology deployment reminds J2EE times. Not a library</li>
 						<li class="fragment">Docker unfriendly (we run Mesos Marathon)</li>
-						<li class="fragment">Wants two-way network communication (Akka cluster)</li>
 						<li class="fragment">Checkpointing is slow (in our case), bad interface</li>
-						<li class="fragment">Almost doesn't lie about "exactly once" processing</li>
-						<li class="fragment">Has terrible type signatures (i.e. <em>partition</em>)</li>
 						<li class="fragment">No testing infrastructure for Stream API</li>
 					</ul>
 				</section>
@@ -253,7 +235,7 @@ dataStream.join(otherStream)
 					<p>The way we process data is framework/library agnostic.</p>
 					<p>(Not very) unique Flink features we use:
 					<ul class="fragment">
-						<li>Partitioning (horisontal scale)</li>
+						<li>Partitioning (horizontal scale)</li>
 						<li>Topology UI (for debugging)</li>
 					</ul>
 					<p class="fragment">Everything else available in <em>libraries</em> like Monix, Akka Streams, FS2, ...</p>
